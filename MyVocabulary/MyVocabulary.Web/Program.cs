@@ -16,9 +16,17 @@ app.MapPost("entry2", (context) =>
     DataBase.PostToBase(englishWord,russianWord);
     var response2 = context.Response;
     response2.ContentType = "text/plain; charset=utf-8";
-    response2.WriteAsync($"{russianWord},{englishWord}");
+    response2.WriteAsync("строка добавлена");
+    return Task.CompletedTask;
+});
+app.MapGet("search", (context) =>
+{
+    var query = context.Request.Query;
+    string wordOfSearch = query["wordOfSearch"];
+    var dataBaseString = DataBase.GetFromBase(wordOfSearch);
+    var response2 = context.Response;
+    response2.ContentType = "text/plain; charset=utf-8";
+    response2.WriteAsync($"{dataBaseString.RussianWord},{dataBaseString.EnglishWord}");
     return Task.CompletedTask;
 });
 app.Run();
-//Server = localhost; Database = master; Trusted_Connection = True;
-//MSSQLSERVER
