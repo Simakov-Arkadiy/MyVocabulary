@@ -23,7 +23,7 @@ namespace MyVocabulary.Web
             string connectionString = "Data Source=localhost;Initial Catalog=vocabulary;Integrated Security=True;Encrypt=False";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
-            string query = $"INSERT INTO Words(englishWord, russianWord) VALUES('{englishWord}','{russianWord}')";
+            string query = $"INSERT INTO Words(englishWord, russianWord, priority) VALUES('{englishWord}','{russianWord}','5')";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             cmd.ExecuteNonQuery();
         }
@@ -45,6 +45,13 @@ namespace MyVocabulary.Web
             cmdAnswer.Close();
             return dataBaseFalseString;
 
+        }
+        public static Exercise GetExercise()
+        {
+            string connectionString = "Data Source=localhost;Initial Catalog=vocabulary;Integrated Security=True;Encrypt=False";
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();
+            string query = $"SELECT [ID][englishWord],[russianWord] FROM Words WHERE priority > 1 ORDER BY [priority] DESC";
         }
     }
 }
