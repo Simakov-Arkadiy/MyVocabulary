@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using System.Transactions;
 namespace MyVocabulary.Web
 {
     public class DataBase
@@ -23,9 +24,10 @@ namespace MyVocabulary.Web
             string connectionString = "Data Source=localhost;Initial Catalog=vocabulary;Integrated Security=True;Encrypt=False";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
-            string query = $"INSERT INTO Words(englishWord, russianWord, priority) VALUES('{englishWord}','{russianWord}','5')";
+            string query = $"INSERT INTO Words(englishWord, russianWord, priority) VALUES('{englishWord}','{russianWord}',5 )";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             cmd.ExecuteNonQuery();
+            
         }
         public static DataBase GetFromBase(string wordOfSearch)
         {
@@ -51,7 +53,27 @@ namespace MyVocabulary.Web
             string connectionString = "Data Source=localhost;Initial Catalog=vocabulary;Integrated Security=True;Encrypt=False";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
-            string query = $"SELECT [ID][englishWord],[russianWord] FROM Words WHERE priority > 1 ORDER BY [priority] DESC";
+            string query = "UPDATE Words SET priority = priority + 1; UPDATE Words SET priority = 0 OUTPUT inserted.* FROM (SELECT TOP 4* FROM Words ORDER BY priority DESC) AS subWords WHERE Words.ID = subWords.Id";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            var cmdAnswer = cmd.ExecuteReader();
+            if (cmdAnswer.HasRows)
+            {
+                cmdAnswer.Read();
+                string givenWord = $"{cmdAnswer.GetValue(1)}";
+                string[] answerOptions = new string[4];
+                answerOptions[0] = $"{cmdAnswer.GetValue(2)}";
+                for (int i = 1; i<4; i++)
+                {
+                    cmdAnswer.Read();
+                    answerOptions[i] = $"{cmdAnswer.GetValue(2)}";
+                }
+                var exerciseObject = new Exercise(givenWord,answerOptions);
+                return exerciseObject;
+            }
+            sqlConnection.Close();
+            var exerciseFalseObject = new Exercise("absent", new string[] { "absent", "absent" });
+            cmdAnswer.Close();
+            return exerciseFalseObject;
         }
     }
 }
