@@ -7,6 +7,7 @@ namespace MyVocabulary.Web.Pages
     {
         public void OnGet()
         {
+            //var exerciseObject = DataBase.GetExercise();
         }
     }
 }
