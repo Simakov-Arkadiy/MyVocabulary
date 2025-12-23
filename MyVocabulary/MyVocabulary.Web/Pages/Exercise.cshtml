@@ -64,17 +64,16 @@
         </nav>
     </aside>
     <main class="main">
-            <form name="form1" action="/entry2" method="get">
-                <span class="main">
-                    <h5>слово на русском языке</h5>
-                    <input name="russianWord" type="text" />
-                </span>
-                <span class="main">
-                    <h5>слово на английском языке</h5>
-                    <input name="englishWord" type="text" />
-                </span>
-                <button type="submit">Записать</button>
-            </form>
+        <p>@Model.giwenWord</p>
+        <form name="form3" action="/examination" method="post">
+               <p>Выбирите правильный вариант ответа</p>
+            <input name="word" type="radio" value="@Model.answerOption[0]" required> @Model.answerOption[0]<br>
+            <input name="word" type="radio" value="@Model.answerOption[1]" required> @Model.answerOption[1]<br>
+            <input name="word" type="radio" value="@Model.answerOption[2]" required> @Model.answerOption[2]<br>
+            <input name="word" type="radio" value="@Model.answerOption[3]" required> @Model.answerOption[3]<br>
+            <input type="hidden" name="translationGiwenWord" value=@Model.translationGiwenWord>
+            <button type="submit">проверить</button>
+        </form>
         <article></article>
     </main>
     <footer></footer>
