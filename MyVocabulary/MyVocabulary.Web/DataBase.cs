@@ -4,6 +4,8 @@ namespace MyVocabulary.Web
 {
     public class DataBase
     {
+        public const string connectionString = "Data Source=localhost;Initial Catalog=MyVocabulary;User ID=sa;Password=123456qweRTY;Encrypt=False";
+        //public const string connectionString = "Data Source=localhost;User ID=sa;Password=123456qweRTY;Encrypt=False";
         public int Id;
         public string EnglishWord;
         public string RussianWord;
@@ -21,7 +23,7 @@ namespace MyVocabulary.Web
         }
         public static void PostToBase(string englishWord, string russianWord)
         {
-            string connectionString = "Data Source=localhost;Initial Catalog=vocabulary;Integrated Security=True;Encrypt=False";
+            
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
             string query = $"INSERT INTO Words(englishWord, russianWord, priority) VALUES('{englishWord}','{russianWord}',5 )";
@@ -31,7 +33,6 @@ namespace MyVocabulary.Web
         }
         public static DataBase GetFromBase(string wordOfSearch)
         {
-            string connectionString = "Data Source=localhost;Initial Catalog=vocabulary;Integrated Security=True;Encrypt=False";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
             string query = $"SELECT * FROM Words WHERE englishWord = '{wordOfSearch}' OR russianWord = '{wordOfSearch}'";
@@ -50,7 +51,6 @@ namespace MyVocabulary.Web
         }
         public static Exercise GetExercise()
         {
-            string connectionString = "Data Source=localhost;Initial Catalog=vocabulary;Integrated Security=True;Encrypt=False";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
             string query = "UPDATE Words SET priority = priority + 1; UPDATE Words SET priority = 0 OUTPUT inserted.* FROM (SELECT TOP 4* FROM Words ORDER BY priority DESC) AS subWords WHERE Words.ID = subWords.Id";

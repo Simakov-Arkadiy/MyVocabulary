@@ -5,9 +5,12 @@ using System;
 using System.Diagnostics.Metrics;
 
 
+DatabaseCreator.CreateDataBase();
+    
+    
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
-
 var app = builder.Build();
 app.UseDefaultFiles();
 app.UseRouting();
@@ -18,10 +21,11 @@ app.MapPost("entry2", (context) =>
     var form = context.Request.Form;
     string russianWord = form["russianWord"];
     string englishWord = form["englishWord"];
+
     DataBase.PostToBase(englishWord,russianWord);
     var response2 = context.Response;
     response2.ContentType = "text/plain; charset=utf-8";
-    response2.WriteAsync("строка добавлена");
+    response2.WriteAsync("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
     return Task.CompletedTask;
 });
 app.MapGet("search", (context) =>
@@ -43,12 +47,12 @@ app.MapPost("examination", (context) =>
     if (selectedValue == translationGiwenWord)
     {
         response2.ContentType = "text/html; charset=utf-8";
-        response2.WriteAsync("<meta http-equiv=\"refresh\" content=\"2; url=/Exercise\"><h2>Верно!</h2>");
+        response2.WriteAsync("<meta http-equiv=\"refresh\" content=\"2; url=/Exercise\"><h2>пїЅпїЅпїЅпїЅпїЅ!</h2>");
     }
     else 
     {
         response2.ContentType = "text/html; charset=utf-8";
-        response2.WriteAsync("<meta http-equiv=\"refresh\" content=\"2; url=/Exercise\"><h2>Не верно!</h2>");
+        response2.WriteAsync("<meta http-equiv=\"refresh\" content=\"2; url=/Exercise\"><h2>пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ!</h2>");
     }
     return Task.CompletedTask;
 
