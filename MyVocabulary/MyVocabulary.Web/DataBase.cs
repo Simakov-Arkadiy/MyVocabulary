@@ -4,7 +4,7 @@ namespace MyVocabulary.Web
 {
     public class DataBase
     {
-        public const string connectionString = "Data Source=localhost;Initial Catalog=MyVocabulary;User ID=sa;Password=123456qweRTY;Encrypt=False";
+        public const string connectionString = "Data Source=localhost;Database=vocabulary;Trusted_Connection=True;TrustServerCertificate=true";
         //public const string connectionString = "Data Source=localhost;User ID=sa;Password=123456qweRTY;Encrypt=False";
         public int Id;
         public string EnglishWord;

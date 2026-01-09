@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="MyVocabulary.Tests/MyVocabulary.Tests.csproj" Id="e886d0ba-1947-44e0-b1d7-c7f9a2882c93" />
   <Project Path="MyVocabulary.Web/MyVocabulary.Web.csproj" Id="7cfdd479-58f9-47e8-8233-d34bbe44ba89" />
 </Solution>
