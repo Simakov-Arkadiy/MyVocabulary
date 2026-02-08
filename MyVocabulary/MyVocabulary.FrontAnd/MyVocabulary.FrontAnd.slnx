@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="MyVocabulary.FrontAnd/myvocabulary.frontand.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+</Solution>

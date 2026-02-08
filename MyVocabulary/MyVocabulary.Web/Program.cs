@@ -4,6 +4,8 @@ using MyVocabulary.Web;
 using System;
 using System.Diagnostics.Metrics;
 
+var serviceCollection = new ServiceCollection();
+
 
 DatabaseCreator.CreateDataBase();
     
