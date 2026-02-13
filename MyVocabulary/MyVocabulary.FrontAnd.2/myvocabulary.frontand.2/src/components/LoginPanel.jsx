@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import Login from './Login.jsx'
 function LoginPanel() {
     var LoginPanel = {
         position: 'absolute',
@@ -8,10 +9,11 @@ function LoginPanel() {
         top: '30%',
         transform: 'translate(-50%,-50%)',
         height: '20%',
-        backgroundColor: 'rgba(199, 244, 250)'
+        backgroundColor: 'rgba(199, 244, 250)',
+        border: '3px solid rgba(222, 195,204)'
     };
-    return (<div style = {LoginPanel}> 
-             <h1>Hello METANIT.COM</h1>
+    return (<div style={LoginPanel}>
+                 <Login/>
             </div>);
 }
 

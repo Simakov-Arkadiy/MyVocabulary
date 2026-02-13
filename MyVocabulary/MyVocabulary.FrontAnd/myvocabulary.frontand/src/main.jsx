@@ -1,9 +1,0 @@
-﻿import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import LoginPanel from './components/LoginPanel'
-
-createRoot(document.getElementById('root')).render(
-  
-        <LoginPanel/>,
-  
-)
