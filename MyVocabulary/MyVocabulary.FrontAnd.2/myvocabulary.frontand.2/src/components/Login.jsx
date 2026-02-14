@@ -1,20 +1,27 @@
 ﻿import React from 'react';
-import LoginLabel from './LoginLabel.jsx';
+import LoginInput from './LoginInput.jsx';
+import { useState } from 'react'
+
 function Login() {
-   
+
+
+
+    const registration = () => {
+        console.log('регистрация!')
+    }
     return (
         <div>
         <form name="loginForm" method="get" action="/authorization">
         <fieldset>
                     <legend>Авторизация</legend>
-                    <p><LoginLabel forName ="login" text="логин"  /><input type="text" id="login" /></p>
-                    <p><LoginLabel forName="password" text="пароль" /><input type="password" id="password"/></p>
+                    <LoginInput  text="логин" type="text" id="login" />
+                    <LoginInput  text="пароль" type="password" id="password"/>
         </fieldset>
         <p><input type="submit" value="авторизоваться"/></p>
-        </form>
-            <div><input type="submit" value="зарегистрироваться"/></div>
+            </form>
+            <div><input onClick={registration} type="submit" value="зарегистрироваться" /></div>
     </div>
     )
 }
 
-export default Login;
+export default Login; 
