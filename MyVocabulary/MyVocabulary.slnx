@@ -1,4 +1,7 @@
 <Solution>
-  <Project Path="MyVocabulary.Tests/MyVocabulary.Tests.csproj" Id="e886d0ba-1947-44e0-b1d7-c7f9a2882c93" />
+  <Project Path="MyVocabulary.Tests/MyVocabulary.Tests.csproj" Id="e886d0ba-1947-44e0-b1d7-c7f9a2882c93">
+    <BuildDependency Project="MyVokabulary.Repository/MyVokabulary.Repository.csproj" />
+  </Project>
   <Project Path="MyVocabulary.Web/MyVocabulary.Web.csproj" Id="7cfdd479-58f9-47e8-8233-d34bbe44ba89" />
+  <Project Path="MyVokabulary.Repository/MyVokabulary.Repository.csproj" Id="1c0b6bca-b811-45ab-ba3f-35ef70c5b45f" />
 </Solution>

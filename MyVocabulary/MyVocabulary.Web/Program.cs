@@ -1,8 +1,14 @@
-using Azure;
+﻿using Azure;
 using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using MyVocabulary.Web;
+using MyVokabulary.Repository.Data;
 using System;
 using System.Diagnostics.Metrics;
+
+
+
 
 var serviceCollection = new ServiceCollection();
 
@@ -12,6 +18,9 @@ DatabaseCreator.CreateDataBase();
     
 
 var builder = WebApplication.CreateBuilder(args);
+var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<MyVocabularyContext>(options =>
+                options.UseSqlite(connection));
 builder.Services.AddRazorPages();
 var app = builder.Build();
 app.UseDefaultFiles();
