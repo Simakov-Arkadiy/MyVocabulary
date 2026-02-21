@@ -11,8 +11,13 @@ namespace MyVokabulary.Repository.Data
         public DbSet<User> Users{ get; set; }
         public DbSet<LanguageDoublet> LanguageDoublets { get; set; }
 
-        public MyVocabularyContext(DbContextOptions<MyVocabularyContext> options) : base(options)
+        public MyVocabularyContext(DbContextOptions<MyVocabularyContext> options)
+        : base(options)
         {
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Data Source=localhost;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=True;Application Name=\"SQL Server Management Studio\";Command Timeout=0");
         }
     }
 }

@@ -20,8 +20,7 @@ DatabaseCreator.CreateDataBase();
 var builder = WebApplication.CreateBuilder(args);
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MyVocabularyContext>(options =>
-                options.UseSqlite(connection));
-builder.Services.AddRazorPages();
+                options.UseSqlServer(connection));
 var app = builder.Build();
 app.UseDefaultFiles();
 app.UseRouting();
