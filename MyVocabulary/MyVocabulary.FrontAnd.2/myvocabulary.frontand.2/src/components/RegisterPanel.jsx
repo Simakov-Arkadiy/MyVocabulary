@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import LoginInput from './LoginInput.jsx';
-function RegisterPanel() {
+function RegisterPanel(props) {
     var RegisterPanel = {
         position: 'absolute',
         margin: '0px',
@@ -19,13 +19,13 @@ function RegisterPanel() {
      { ID: 2, text: 'повторить пароль', type: 'password', id: 'password' }];
 
     return (<div>
-        <form name="RegisterForm" method="get" action="/registration">
+        <form className="RegisterForm" onSubmit={props.registerButton} >
             <fieldset>
                 <legend>Регистрация</legend>
                 {inputs.map((input) => (<LoginInput text={input.text} type={input.type} id={input.id} key={input.ID} />))}
             </fieldset>
+            <div><input type="submit" value="зарегистрироваться" /></div>
         </form>
-        <div><input /*onClick={props.registerBattonCallBack}*/ type="submit" value="зарегистрироваться" /></div>
     </div>)
 }
 

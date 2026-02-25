@@ -16,7 +16,9 @@ function HomePanel() {
         border: '3px solid rgba(222, 195,204)'
     };
 
-   
+    const registerButton = (enteredLogin, enteredPassword, enteredRepeatPassword) => {
+        fetch('http://localhost:5167/Registration/Register?login={enteredLogin}&password={enteredPassword}&repeatPassword={enteredLogin}')
+    }
 
     
     const [currentPage, setCurrentPage] = useState('login');
@@ -28,7 +30,7 @@ function HomePanel() {
     }
     if (currentPage === 'register') {
         return (<div style={HomePanel}>
-            <RegisterPanel />
+            <RegisterPanel registerBattonCallBack={registerButton} />
         </div>);
     }
 }
