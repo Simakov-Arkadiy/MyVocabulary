@@ -17,7 +17,9 @@ function HomePanel() {
     };
 
     const registerButton = (enteredLogin, enteredPassword, enteredRepeatPassword) => {
-        fetch('http://localhost:5167/Registration/Register?login={enteredLogin}&password={enteredPassword}&repeatPassword={enteredLogin}')
+        fetch(`http://localhost:5167/Registration/Register?login=${enteredLogin}&password=${enteredPassword}&repeatPassword=${enteredRepeatPassword}`)
+            .then(response => response.json())
+            .then(json => console.log(json))
     }
 
     

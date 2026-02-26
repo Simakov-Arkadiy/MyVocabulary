@@ -21,11 +21,14 @@ var builder = WebApplication.CreateBuilder(args);
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MyVocabularyContext>(options =>
                 options.UseSqlServer(connection));
+builder.Services.AddControllers();
 var app = builder.Build();
+app.MapControllerRoute(
+    name: "registration",
+    pattern: "{controller=Registration}/{action=Register}");
 app.UseDefaultFiles();
 app.UseRouting();
 app.UseStaticFiles();
-app.MapRazorPages(); 
 app.MapPost("entry2", (context) =>
 {
     var form = context.Request.Form;

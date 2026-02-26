@@ -8,14 +8,15 @@ namespace MyVocabulary.Web.Controllers
     public class RegistrationController:Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly MyVocabularyContext _context;
-
+        
         public RegistrationController(MyVocabularyContext context)
         {
             _context = context;
         }
-
-        public string Registration(User user)
+        
+        public string Register(User user)
         {
+            
             if (user != null)
             {
                 _context.Users.Add(user);
@@ -24,7 +25,7 @@ namespace MyVocabulary.Web.Controllers
             }
             else
             {
-                return "Регистрация н прошла, допущенна ошибка";
+                return "Регистрация не прошла, допущенна ошибка";
             }
         }
     }
