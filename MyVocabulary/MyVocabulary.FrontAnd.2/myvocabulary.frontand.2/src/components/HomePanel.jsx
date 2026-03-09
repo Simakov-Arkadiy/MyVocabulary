@@ -15,11 +15,32 @@ function HomePanel() {
         backgroundColor: 'rgba(199, 244, 250)',
         border: '3px solid rgba(222, 195,204)'
     };
+    const [newForm, setNewForm] = useState({ login: "", password:"", repeatPassword:"" });
+
+    function handleChange(e) {
+        const { name, value } = e.target;
+        setNewForm((newForm) => ({ ...newForm, [name]: value }));
+        console.log(newForm);
+    }
 
     const registerButton = (enteredLogin, enteredPassword, enteredRepeatPassword) => {
-        fetch(`http://localhost:5167/Registration/Register?login=${enteredLogin}&password=${enteredPassword}&repeatPassword=${enteredRepeatPassword}`)
-            .then(response => response.json())
-            .then(json => console.log(json))
+        if (enteredPassword == enteredRepeatPassword) {
+            let personObject = {
+                Login: `${enteredLogin}`,
+                Password: `${enteredPassword}`
+            }
+            fetch('http://localhost:5167/Registration/Register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(personObject)
+            })
+        }
+        else {
+            alert("пароль и повтор пароля не совпадают");
+        }
+        
     }
 
     
@@ -32,7 +53,7 @@ function HomePanel() {
     }
     if (currentPage === 'register') {
         return (<div style={HomePanel}>
-            <RegisterPanel registerBattonCallBack={registerButton} />
+            <RegisterPanel registerBattonCallBack={registerButton} newForm={newForm} setNewForm={setNewForm} handleChange={handleChange} />
         </div>);
     }
 }

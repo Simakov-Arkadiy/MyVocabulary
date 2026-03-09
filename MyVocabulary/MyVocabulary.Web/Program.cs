@@ -18,6 +18,11 @@ DatabaseCreator.CreateDataBase();
     
 
 var builder = WebApplication.CreateBuilder(args);
+
+var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors();
+
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MyVocabularyContext>(options =>
                 options.UseSqlServer(connection));
@@ -28,6 +33,10 @@ app.MapControllerRoute(
     pattern: "{controller=Registration}/{action=Register}");
 app.UseDefaultFiles();
 app.UseRouting();
+
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader()
+                            .AllowAnyMethod());
+
 app.UseStaticFiles();
 app.MapPost("entry2", (context) =>
 {

@@ -14,7 +14,7 @@ namespace MyVocabulary.Web.Controllers
             _context = context;
         }
         
-        public string Register(User user)
+        public string Register([FromBody] User user)
         {
             
             if (user != null)

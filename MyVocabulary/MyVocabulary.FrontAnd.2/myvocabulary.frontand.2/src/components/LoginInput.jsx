@@ -4,7 +4,7 @@ function LoginInput(props)
 {
     
     return (<>
-        <p><LoginLabel forName={props.id} text={props.text} /><input type={props.type} id={props.id} /></p>
+        <p><LoginLabel forName={props.id} text={props.text} /><input type={props.type} id={props.id} value={props.newForm} onChange={props.onChange} name={props.name} /></p>
     </>);
 }
 
