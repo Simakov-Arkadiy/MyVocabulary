@@ -4,7 +4,8 @@ using MyVokabulary.Repository.Models;
 
 namespace MyVocabulary.Web.Controllers
 {
-    [Controller]
+    [ApiController]
+    [Route("[controller]")]
     public class RegistrationController:Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly MyVocabularyContext _context;
@@ -14,18 +15,36 @@ namespace MyVocabulary.Web.Controllers
             _context = context;
         }
         
-        public string Register([FromBody] User user)
+        public ContentResult Register([FromBody] User user)
         {
             
             if (user != null)
             {
-                _context.Users.Add(user);
-                _context.SaveChanges();
-                return "Регистрация прошла успешно";
+                var dbUser = from element in _context.Users where (element.Login == user.Login) &&(element.Password == user.Login) select element;
+                if (dbUser == null)
+                {
+                    _context.Users.Add(user);
+                    _context.SaveChanges();
+                    Response.ContentType = "application/json";
+                   ContentResult result = new ContentResult();
+                    result.Content = "Регистрация прошла успешно!";
+                    result.StatusCode = 200;
+                    return result;
+                }
+                else
+                {
+                    ContentResult result = new ContentResult();
+                    result.Content = "Регистрация не прошла, допущенна ошибка!";
+                    result.StatusCode = 400;
+                    return result;
+                }
             }
             else
             {
-                return "Регистрация не прошла, допущенна ошибка";
+                ContentResult result = new ContentResult();
+                result.Content = "Регистрация не прошла, допущенна ошибка!";
+                result.StatusCode = 400;
+                return result;
             }
         }
     }

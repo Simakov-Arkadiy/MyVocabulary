@@ -36,6 +36,10 @@ function HomePanel() {
                 },
                 body: JSON.stringify(personObject)
             })
+                .then(response => response.json())
+                .then(jsResponse => console.log(jsResponse))
+        
+ 
         }
         else {
             alert("пароль и повтор пароля не совпадают");
