@@ -36,7 +36,7 @@ function HomePanel() {
                 },
                 body: JSON.stringify(personObject)
             })
-                .then(response => response.json())
+                //.then(response => response.json())
                 .then(jsResponse => console.log(jsResponse))
         
  

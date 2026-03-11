@@ -19,18 +19,40 @@ DatabaseCreator.CreateDataBase();
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddCors();
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+//builder.Host.ConfigureLogging(logging =>
+//{
+//    logging.ClearProviders();
+//    logging.AddConsole();
+//})
 builder.Services.AddDbContext<MyVocabularyContext>(options =>
                 options.UseSqlServer(connection));
+
 builder.Services.AddControllers();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
-app.MapControllerRoute(
-    name: "registration",
-    pattern: "{controller=Registration}/{action=Register}");
+
+//app.MapControllerRoute(
+//    name: "registration",
+//    pattern: "{controller=Registration}/{action=Register}");
+
+
+app.MapControllers();
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseDefaultFiles();
 app.UseRouting();
 

@@ -2,6 +2,7 @@
 using MyVokabulary.Repository.Data;
 using MyVokabulary.Repository.Models;
 
+
 namespace MyVocabulary.Web.Controllers
 {
     [ApiController]
@@ -14,10 +15,10 @@ namespace MyVocabulary.Web.Controllers
         {
             _context = context;
         }
-        
+
+        [HttpPost("Register")]
         public ContentResult Register([FromBody] User user)
-        {
-            
+        {        
             if (user != null)
             {
                 var dbUser = from element in _context.Users where (element.Login == user.Login) &&(element.Password == user.Login) select element;
