@@ -1,4 +1,4 @@
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 namespace MyVocabulary.Web
 {
     public class DatabaseCreator
@@ -18,6 +18,7 @@ namespace MyVocabulary.Web
                 string query = "CREATE TABLE Words(ID INT IDENTITY, russianWord NVARCHAR(30), englishWord NVARCHAR(30), priority INT)";
                 SqlCommand cmd = new SqlCommand(query, sqlConnection);
                 cmd.ExecuteNonQuery();
+                Console.WriteLine($"{ex.Message}");
             }
         }
     }

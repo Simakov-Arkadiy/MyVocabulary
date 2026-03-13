@@ -15,9 +15,12 @@ namespace MyVokabulary.Repository.Data
         : base(options)
         {
         }
+        public MyVocabularyContext()
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=True;Application Name=\"SQL Server Management Studio\";Command Timeout=0");
+            optionsBuilder.UseSqlServer("Data Source=localhost;Integrated Security=True;Initial Catalog=MyVocabulary;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=True;Application Name=\"SQL Server Management Studio\";Command Timeout=0");
         }
     }
 }

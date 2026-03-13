@@ -6,8 +6,8 @@ using MyVokabulary.Repository.Models;
 namespace MyVocabulary.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class RegistrationController:Microsoft.AspNetCore.Mvc.Controller
+    [Route("api/[controller]")]
+    public class RegistrationController:Microsoft.AspNetCore.Mvc.ControllerBase
     {
         private readonly MyVocabularyContext _context;
         
