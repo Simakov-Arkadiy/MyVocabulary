@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using MyVocabulary.Web.Models;
 using MyVokabulary.Repository.Data;
 using MyVokabulary.Repository.Models;
 
@@ -10,42 +12,45 @@ namespace MyVocabulary.Web.Controllers
     public class RegistrationController:Microsoft.AspNetCore.Mvc.ControllerBase
     {
         private readonly MyVocabularyContext _context;
-        
-        public RegistrationController(MyVocabularyContext context)
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
+
+        public RegistrationController(
+            MyVocabularyContext context, 
+            UserManager<IdentityUser> userManager,
+        SignInManager<IdentityUser> signInManager)
         {
             _context = context;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
         [HttpPost("Register")]
-        public ContentResult Register([FromBody] User user)
-        {        
-            if (user != null)
+        public async Task<IActionResult> Register([FromBody] UserModel user)
+        {
+            var userIdentity = new IdentityUser { UserName = user.Login };
+            var result = await userManager.CreateAsync(userIdentity, user.Password);
+            if (result.Succeeded)
             {
-                var dbUser = from element in _context.Users where (element.Login == user.Login) &&(element.Password == user.Login) select element;
-                if (dbUser == null)
-                {
-                    _context.Users.Add(user);
-                    _context.SaveChanges();
-                    Response.ContentType = "application/json";
-                   ContentResult result = new ContentResult();
-                    result.Content = "Регистрация прошла успешно!";
-                    result.StatusCode = 200;
-                    return result;
-                }
-                else
-                {
-                    ContentResult result = new ContentResult();
-                    result.Content = "Регистрация не прошла, допущенна ошибка!";
-                    result.StatusCode = 400;
-                    return result;
-                }
+                return Ok();
             }
             else
             {
-                ContentResult result = new ContentResult();
-                result.Content = "Регистрация не прошла, допущенна ошибка!";
-                result.StatusCode = 400;
-                return result;
+                return BadRequest();
+            }
+        }
+        [HttpPost("Login")]
+
+        public async Task<IActionResult> Login([FromBody] UserModel user)
+        {
+            var result = await signInManager.PasswordSignInAsync(user.Login, user.Password,true,true);
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
             }
         }
     }

@@ -30,6 +30,7 @@ builder.Services.AddDbContext<MyVocabularyContext>(options =>
 //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<MyVocabularyContext>();
 builder.Services.AddAuthorization();
+
 builder.Services.AddControllers();
 builder.Services.AddHttpLogging(options => options.LoggingFields = Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestProperties);
 builder.Logging.AddFilter("Microsoft.AspNetCore.HttpLogging", LogLevel.Information);

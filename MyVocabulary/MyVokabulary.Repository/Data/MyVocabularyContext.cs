@@ -16,13 +16,12 @@ namespace MyVokabulary.Repository.Data
         public MyVocabularyContext(DbContextOptions<MyVocabularyContext> options)
         : base(options)
         {
-            Database.EnsureCreated();
-            Console.WriteLine("pis");
+           
         }
-        //public MyVocabularyContext() => Database.EnsureCreated();
+        
         public MyVocabularyContext() 
         {
-            Database.EnsureCreated();
+            
         }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
